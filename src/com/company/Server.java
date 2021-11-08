@@ -17,21 +17,20 @@ public class Server {
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
             DataInputStream in = new DataInputStream(socket.getInputStream());
             DataOutputStream wr = new DataOutputStream(socket.getOutputStream());
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        while (true) {
-//
-//                        }
-//                    }catch (IOException e){
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }).start();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        while (true) {
+                            System.out.println(in.readUTF());
+                        }
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
             while (true){
                 wr.writeUTF("Сообщение от сервера: "+consoleReader.readLine());
-                System.out.println(in.readUTF());
             }
         }catch (IOException e){
             e.printStackTrace();

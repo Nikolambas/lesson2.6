@@ -19,20 +19,19 @@ public class Client {
              DataOutputStream wr = new DataOutputStream(socket.getOutputStream());
              DataInputStream in = new DataInputStream(socket.getInputStream());) {
             System.out.println("Вы подключились к серверу");
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        while (true) {
-//
-//                        }
-//                    }catch (IOException e){
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }).start();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        while (true) {
+                            System.out.println(in.readUTF());
+                        }
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
             while (true){
-                System.out.println(in.readUTF());
                 wr.writeUTF("Сообщение от клиента: "+consoleReader.readLine());
             }
         }catch (Exception e){
